@@ -1,0 +1,47 @@
+{
+  "name": "seu-xscwx-webservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "yarn && cross-env NODE_ENV=development nodemon --tls-min-v1.0 app.js --mode=development --port=3000",
+    "start": "yarn && cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=production nodemon --tls-min-v1.0 app.js --mode=production --port=3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://10.64.132.19/R_shrug/seu-xscwx-webservice.git"
+  },
+  "author": "Herald",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "axios-cookiejar-support": "^0.5.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "chalk": "^2.3.0",
+    "commander": "^4.1.1",
+    "cross-env": "^7.0.0",
+    "crypto": "^1.0.1",
+    "eslint": "^6.8.0",
+    "fast-xml-parser": "^3.16.0",
+    "fs": "^0.0.1-security",
+    "iconv-lite": "^0.5.1",
+    "js-yaml": "^3.10.0",
+    "jschardet-eastasia": "^1.4.1",
+    "kf-router": "^2.2.2",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "moment": "^2.24.0",
+    "mongodb": "^3.5.2",
+    "node-schedule": "^1.3.2",
+    "nodemon": "^2.0.2",
+    "ora": "^4.0.3",
+    "oracledb": "^4.2.0",
+    "prettyjson": "^1.2.1",
+    "querystring": "^0.2.0",
+    "tough-cookie": "^3.0.1",
+    "uuid": "^3.4.0",
+    "vm": "^0.1.0"
+  }
+}

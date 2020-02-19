@@ -1,0 +1,6 @@
+node_modules/
+database/mongodb-secret.json
+database/oracle-secret.js
+.repl_history
+.repl_history
+config.yml

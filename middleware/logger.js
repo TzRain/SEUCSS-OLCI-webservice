@@ -1,20 +1,3 @@
-// const mongodb = require('../database/mongodb')
-/**
-  # 日志中间件
-
-  代替 koa 的日志中间件，为了解析 return.js 中间件返回的 JSON 状态码，并且为了好看。
- */
-
-
-// const { send, Auth } = require('pandora-nodejs-sdk')
-// const { qiniuLog } = require('../sdk/sdk.json')
-
-// let qiniuAuth 
-// try{
-//   qiniuAuth = new Auth(qiniuLog.access, qiniuLog.secret)
-// }catch(e){
-//   console.log('七牛云日志服务未配置')
-// }
 
 
 // 修改为使用MongoDB数据库保存log

@@ -11,9 +11,8 @@ exports.route = {
     
     if (!params) {
       throw '没有必须字段'//记得非法throw要throw出具体错误
-    } {
-      let res = params
-      return res//这里的res 会存在于返回响应的 result字段 里
+    }else {
+      return "这是测试返回"//这里的res 会存在于返回响应的 result字段 里
     }
   }
 }

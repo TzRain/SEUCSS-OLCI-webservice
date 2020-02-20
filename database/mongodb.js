@@ -6,8 +6,8 @@ const password = encodeURIComponent(config.pwd)
 const authMechanism = 'DEFAULT'
 
 // Connection URL
-const url = `mongodb://${user}:${password}@${config.host}:${config.port}/webservice?authMechanism=${authMechanism}`
-const urlDebug = `mongodb://${config.host}:${config.port}/webservice`
+const url = `mongodb://${user}:${password}@${config.host}:${config.port}/OLCI?authMechanism=${authMechanism}`
+const urlDebug = `mongodb://${config.host}:${config.port}/OLCI`
 
 let mongodb = null
 let mongodbUrl = ''
@@ -22,7 +22,7 @@ const getCollection = async (col) => {
     mongodb = await MongoClient.connect(mongodbUrl, { useNewUrlParser: true, 
       //useUnifiedTopology: true 
     })
-    mongodb = mongodb.db('webservice')
+    mongodb = mongodb.db('OLCI')
     return mongodb.collection(col)
   }
 }

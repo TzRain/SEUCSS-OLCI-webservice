@@ -8,6 +8,7 @@ exports.route = {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         let taskdb = await mongodb("task")
         let task = []
+        taskdb.remove()
         task.push({
             taskNum: "11",
             point: 4,
@@ -18,7 +19,6 @@ exports.route = {
             point: 4,
             limt: [60 * 10, 60 * 11]
         })
-        
         for(x in task){
             await taskdb.insertOne(task[x])
         }

@@ -8,10 +8,10 @@ exports.route = {
       if (!QQ) {
         throw "用户未登陆"
       }else {
-        let OLCI = await mongodb('user')
+        let user = await mongodb('user')
         let res
         try{
-          res=await OLCI.findOne({QQ})
+          res=await user.findOne({QQ})
         }catch(e){
           console.log(e)
           throw "没有该账号的记录"

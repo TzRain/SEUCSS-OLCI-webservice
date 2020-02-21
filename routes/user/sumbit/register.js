@@ -7,8 +7,8 @@ exports.route = {
     async get({QQ,name,teamname=""}) {
 			console.log("正在访问>>>>>>>>>"+path+"<<<<<<<<<<");
 			
-			let OLCI = await mongodb('user') 
-			let pre=await OLCI.findOne({QQ})
+			let user = await mongodb('user') 
+			let pre=await user.findOne({QQ})
 			
 			if(QQ){
 				var isnum = /[1-9]+[0-9]{4,11}/.test(QQ);
@@ -22,10 +22,10 @@ exports.route = {
 			}else{
 				try{
 						let rating=0
-						let card=[]
-						let taskList=[]
-						let doneList=[]
-						await OLCI.insertOne({QQ,name,teamname,rating,card,taskList,doneList})
+						let card=new Array()
+						let taskList=new Array()
+						let doneList=new Array()
+						await user.insertOne({QQ,name,teamname,rating,card,taskList,doneList})
         }catch(e){
           console.log(e)
           throw "注册失败"

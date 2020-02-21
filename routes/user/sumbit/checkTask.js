@@ -13,7 +13,6 @@ exports.route = {
 			let {doneList,doneListToday}=user
 			doneList.push({taskNum,time})
 			doneListToday.push(taskNum)
-
 			await userdb.update({QQ},{$set:{doneList,doneListToday}})
 		} catch (e) {
 			console.log(e)

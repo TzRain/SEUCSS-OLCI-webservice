@@ -3,8 +3,13 @@ const ObjectId = require('mongodb').ObjectId
 let donetype = new Array()
 //获取用户基本信息
 
+const debug =true
+
+const path ="/user/get/basic"
+
 exports.route = {
 	async get({ QQ }) {//GET方法
+		console.log("正在运行>>>>>"+path+"<<<<<<");
 		if (!QQ) {
 			throw "用户未登陆"
 		} else {
@@ -14,12 +19,14 @@ exports.route = {
 			try {
 				user = await userdb.findOne({ QQ })
 				//处理每日更新数据
-				let time = new Date()
-				let { pre_time } = user
-				if (pre_time.substr(0, 9) != time.substr(0, 9)) {
-					let {donelistToday}=user
+				let newTime = new Date()
+				
+				let { time,add } = user
+				
+				if (time.getDate() != newTime.getDate()||debug) {
+					let {doneListToday}=user
 					donetype = []
-					for (taskNum in donelistToday){
+					for (taskNum in doneListToday){
 						let {type} = taskdb.findOne({taskNum})
 						donetype.push(type)
 					}
@@ -31,13 +38,14 @@ exports.route = {
 						if(flag)add[i]=add[i]+1
 						else add[i]=0
 					}	
-					donelistToday = []
+					doneListToday = []
 					await userdb.update({ QQ }, { $set: { doneListToday } })
 				}
+				time=newTime
 				await userdb.update({ QQ }, { $set: { time } })
 			} catch (e) {
 				console.log(e)
-				throw "没有该账号的记录"
+				throw "查询失败"
 			}
 			return user
 		}

@@ -22,7 +22,7 @@ exports.route = {
 		} else {
 			try {
 				let rating = 0
-				let time = []
+				let time = new Date()
 				let card = []
 				let taskList = []
 				let doneList = []

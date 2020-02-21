@@ -15,7 +15,7 @@ exports.route = {
             await OLCI.insertOne({QQ,name,teamname})
         }catch(e){
           console.log(e)
-          throw 400
+          throw "注册失败"
         }
         return "success"
       }

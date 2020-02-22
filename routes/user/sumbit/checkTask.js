@@ -40,7 +40,7 @@ exports.route = {
 
 			rating += point
 			await doneListToday.push(taskNum)
-			await doneList.push({ taskNum, time })
+			await doneList.push({ taskNum, time ,point})
 			await userdb.updateOne({ QQ }, { $set: { doneList, doneListToday, rating } })
 			
 			res+="获得"+point.toString()+"积分"

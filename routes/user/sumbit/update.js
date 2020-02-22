@@ -6,11 +6,11 @@ const path = "/user/sumbit/update"
 exports.route = {
 	async get({ QQ, name = "" }) {
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
-		let OLCI = await mongodb('user')
+		let userdb = await mongodb('user')
 		try {
 			if(name){
 				console.log(name);
-				await OLCI.update({QQ},{name})
+				await userdb.updateOne({QQ},{ $set: {name} })
 			}
 		} catch (e) {
 			console.log(e)

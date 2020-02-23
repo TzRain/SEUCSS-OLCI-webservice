@@ -8,14 +8,28 @@ exports.route = {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try {
             let userdb = await mongodb("user")
-            let arr = await userdb.find().sort({ rating: 1 }).toArray();
-            let rank= arr.filter((user)=>user.rating>0).map((user) => {
+            let a = await userdb.find().sort({ point: -1 }).toArray();
+            let users= a.slice(0,14).map((user) => {
                 return {
+                    QQ:user.QQ,
+                    num:user.num,
                     name:user.name,
-                    rating:user.rating
+                    rank:user.rank,
+                    point:user.point
                 }
             })
-            return rank
+
+            let teamdb = await mongodb("team")
+            let b = await teamdb.find().sort({ teampoint: -1 }).toArray();
+            let teams= b.slice(0,4).map((team) => {
+                return {
+                    teamname:team.teamname,
+                    teamrank:team.teamrank,
+                    teampoint:team.teampoint
+                }
+            })
+
+            return {users,teams}
         } catch (e) {
             console.log(e);
             throw "更新失败"

@@ -9,43 +9,27 @@ const path = "/user/get/basic"
 exports.route = {
 	async get({ QQ }) {//GET方法
 		console.log("正在运行>>>>>" + path + "<<<<<<");
+		console.log(QQ);
 		if (!QQ) {
 			throw "用户未登陆"
 		} else {
-			let userdb = await mongodb('user')
-			let taskdb = await mongodb('task')
-			try {
-				user = await userdb.findOne({ QQ })
-				//处理每日更新数据
-				let newTime = new Date()
+			try{
+				let userdb = await mongodb('user')
+				let user = await userdb.findOne({ QQ })
 
-				let { time,add} = user
+				let {name,num,point,rank,teamname}=user
 
-				if (time.getDate() != newTime.getDate() || debug) {
-					let { doneListToday } = user
-					
-					f=new Array(100).fill(false)
-						
-					for(i in doneListToday){
-						f[Number(doneListToday[i])]=true
-					}
+				if(!teamname)return {name,num,QQ,point,rank}
 
-					for(let i=0;i<100;i++){
-						if(f[i])add[i]++
-						else add[i]=0
-					}
+				let teamdb =await mongodb("team")
+				let team = await teamdb.findOne(teamname)
+				let {teampoint,teamrank}=team
 
-					doneListToday = []
-					await userdb.update({ QQ }, { $set: { doneListToday } })
-				}
-				time = newTime
-				await userdb.update({ QQ }, { $set: { time } })
-			} catch (e) {
-				console.log(e)
+				return {name,num,QQ,point,rank,teamname,teampoint,teamrank}
+			}catch(e){
+				console.log(e);
 				throw "查询失败"
 			}
-
-			return {teamname,name,QQ,num,teampoint,rating}=user
 		}
 	}
 }

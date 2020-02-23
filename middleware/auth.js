@@ -9,49 +9,41 @@ const hash = value => {
 	return Buffer.from(crypto.createHash('md5').update(value).digest()).toString('base64')
 }
 
-
 module.exports = async (ctx, next) => {
 	let userdb = await mongodb('user')
-	let acctdb = await mongodb('acct')
 	let { QQ, num } = ctx.params
 	// userdb.remove()
+	if(ctx.path=='/test'){
+		await next()
+	}else 
 	if (ctx.path=='/user/login') {
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
 		let isnum = /213+[0-9]{6}/.test(num);
 		if (!isnum) throw "无效一卡通号"
-
 		let userQQ = await userdb.findOne({ QQ })
 		let usernum = await userdb.findOne({ num })
 		
 		if (!userQQ||!usernum) {
 			console.log("注册")
-			
 			let name = ""
 			let teamname = ""
-			let rating = 0
-			let time = new Date()
-			let teampoint = 0
-			let taskList = []
+			let point = 0
+			let rank 
 			let doneList = []
-			let doneListToday = []
-			let add = new Array(20).fill(0)
 			let token = hash(num)
 			await userdb.insertOne({
-				num,
 				QQ,
+				num,
 				name,
 				teamname,
-				rating,
-				teampoint,
-				taskList,
+				point,
 				doneList,
-				time,
-				doneListToday,
-				add,
-				token
+				token,
+				rank
 			})
 			ctx.params.token=token
+			ctx.params.message="注册成功！"
 			await next()
 		} else {
 			console.log("登陆")
@@ -61,18 +53,19 @@ module.exports = async (ctx, next) => {
 				console.log("登陆成功");
 				console.log(QQ.token);
 				ctx.params.token=userQQ.token
+				ctx.params.message="登陆成功！"
 				await next()
 			}
 			else throw "QQ号或者一卡通错误"
 		}
 	} else {
-		let token = ctx.request.headers.token
+		console.log(ctx.request.headers);
+		let token = ctx.request.headers.authorization
 		if (token) {
 			let user = await userdb.findOne({ token })
 			if (user) {
-				let { num, QQ } = user
+				let { QQ } = user
 				ctx.params.QQ = QQ
-				ctx.params.num = num
 				await next()
 			}
 			else throw "请重新登陆"

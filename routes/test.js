@@ -6,9 +6,22 @@ const path = "test"
 exports.route = {
 	async get(res) {
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<")
-		console.log(res);
-        // console.log(QQ);
-        // console.log(token);        
+        let userdb= await mongodb("user")
+        let teamdb= await mongodb("team")
+        let taskdb= await mongodb("task")
+
+        teamdb.remove()
+        
+        if(res.remove){
+            userdb.remove()
+            
+            taskdb.remove()
+        }
+
+        if(res){
+
+        }
+
         return "访问成功"
     }
 }

@@ -2,8 +2,7 @@
 // const ObjectId = require('mongodb').ObjectId
 
 exports.route = {
-	async get({token}) {
-        console.log(token);
-        return {token}
+	async get({message,token}) {
+        return {message,token}
     }
 }

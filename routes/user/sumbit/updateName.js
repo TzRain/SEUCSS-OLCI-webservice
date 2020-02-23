@@ -1,16 +1,16 @@
 const mongodb = require('../../../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 
-const path = "/user/sumbit/update"
+const path = "/user/sumbit/updateName"
 
 exports.route = {
-	async get({ QQ, name = "" }) {
+	async get({ _id, name = "" }) {
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
 		let userdb = await mongodb('user')
 		try {
 			if(name){
 				console.log(name);
-				await userdb.updateOne({QQ},{ $set: {name} })
+				await userdb.updateOne({_id},{ $set: {name} })
 			}
 		} catch (e) {
 			console.log(e)

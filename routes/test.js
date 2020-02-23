@@ -10,12 +10,12 @@ exports.route = {
         let teamdb= await mongodb("team")
         let taskdb= await mongodb("task")
 
-        teamdb.remove()
         
+        taskdb.remove()
         if(res.remove){
             userdb.remove()
+            teamdb.remove()
             
-            taskdb.remove()
         }
 
         if(res){

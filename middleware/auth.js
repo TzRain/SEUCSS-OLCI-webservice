@@ -64,8 +64,8 @@ module.exports = async (ctx, next) => {
 		if (token) {
 			let user = await userdb.findOne({ token })
 			if (user) {
-				let { QQ } = user
-				ctx.params.QQ = QQ
+				let { _id } = user
+				ctx.params._id = ObjectId(_id)
 				await next()
 			}
 			else throw "请重新登陆"

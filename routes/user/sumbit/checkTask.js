@@ -3,52 +3,62 @@ const ObjectId = require('mongodb').ObjectId
 
 const path = "/user/sumbit/checkTask"
 
+let totalDay = (time)=>Math.ceil(( time - new Date(new Date().getFullYear().toString()))/(24*60*60*1000))+1;
+
 exports.route = {
-	async get({ QQ, taskNum }) {
+	async get({ _id, taskNum }) {
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<")
-		let userdb = await mongodb('user')
-		let taskdb = await mongodb('task')
-		let time = new Date()
-		let res="打卡成功"
 		try {
+			console.log(taskNum);
+			
 			let time = new Date()
 			let minute = time.getUTCHours() * 60 + time.getUTCMinutes()
+			minute =605
 
+			let taskdb = await mongodb('task')
 			let task = await taskdb.findOne({ taskNum })
-			let { limt, point } = task
-			console.log(task);
+			
+			let { limt, v } = task
 
-			let user = await userdb.findOne({ QQ })
-			let { rating, doneList, doneListToday } = user
-			console.log(user);
+			let userdb = await mongodb('user')
+			let user = await userdb.findOne({ _id })
+			let { doneList } = user
 
-			if (minute < limt[0]) return "还没有开始呢"
-			if (limt.slice(-1) < minute) return "今天已经结束咯"
+			if (minute < limt[0]) throw "还没有开始呢"
+			if (limt.slice(-1) < minute) throw "今天已经结束咯"
 
-			for (let x in doneListToday) {
-				if (doneListToday[x] == taskNum) return "今天以及打过卡咯"
-				console.log("num=" + num);
-				console.log("tasknum=" + taskNum);
+			for (let x in doneList) {
+				if(doneList[x].time.getDate()==time.getDate()){
+					if(doneList[x].taskNum == taskNum) throw "今天以及打过卡咯"
+				}
 			}
-
 			for (let x in limt) {
-				console.log(limt[x])
 				if (minute < limt[x]) break
-				point--
+				v--
 			}
 
-			rating += point
-			await doneListToday.push(taskNum)
-			await doneList.push({ taskNum, time ,point})
-			
-			await userdb.updateOne({ QQ }, { $set: { doneList, doneListToday, rating } })
-			
-			res+="获得"+point.toString()+"积分"
+			for (let x in doneList) {
+				if(totalDay(doneList[x].time)+1==totalDay(time)){
+					if(doneList[x].taskNum == taskNum){
+						v++
+						break
+					}
+				}
+			}
 
+			for (let x in doneList) {
+				if(totalDay(doneList[x].time)+2==totalDay(time)){
+					if(doneList[x].taskNum == taskNum){
+						v++
+						break
+					}
+				}
+			}
+			await doneList.push({ taskNum, time ,v})
+			await userdb.updateOne({ _id }, { $set: { doneList } })
 		} catch (e) {
-			console.log(e)
-			throw "打卡时出现错误"
+			throw e
 		}
-		return res
+		return "打卡成功"
 	}
 }

@@ -1,7 +1,7 @@
-const mongodb = require('../../database/mongodb')
+const mongodb = require('../../../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 
-const path = "/rank/get"
+const path = "user/get/rankBoard"
 
 exports.route = {
     async get() {
@@ -28,12 +28,11 @@ exports.route = {
                     teampoint:team.teampoint
                 }
             })
-
             return {users,teams}
         } catch (e) {
             console.log(e);
-            throw "更新失败"
+            throw "获取失败"
         }
-        return "更新成功"
     }
 }
+

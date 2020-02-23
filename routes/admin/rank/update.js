@@ -1,7 +1,7 @@
-const mongodb = require('../../database/mongodb')
+const mongodb = require('../../../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 
-const path = "/admin/update"
+const path = "/admin/rank/update"
 
 exports.route = {
     async get() {

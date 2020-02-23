@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId
 const path = "/admin/task/checkTask"
 
 exports.route = {
-	async get({ _id, taskNum }) {
+	async get({ QQ, taskNum }) {
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<")
 		let userdb = await mongodb('user')
 		let taskdb = await mongodb('task')
@@ -14,22 +14,21 @@ exports.route = {
 			let task = await taskdb.findOne({ taskNum })
 			let {  v } = task
 
-			let user = await userdb.findOne({ _id })
+			let user = await userdb.findOne({ QQ })
 			let { doneList } = user
 
 			for (let x in doneListToday) {
-				if (doneListToday[x] == taskNum) return "今天以及打过卡咯"
+				if (doneListToday[x] == taskNum) throw "今天已经完成咯"
 			}
 
 			await doneList.push({ taskNum, time ,v})
 			
-			await userdb.updateOne({ _id }, { $set: { doneList} })
-			
+			await userdb.updateOne({ QQ }, { $set: { doneList} })
 
 		} catch (e) {
 			console.log(e)
-			throw "打卡时出现错误"
+			throw e
 		}
-		return "打卡成功"
+		return "完成成功"
 	}
 }

@@ -29,7 +29,7 @@ exports.route = {
 
 			for (let x in doneList) {
 				if(doneList[x].time.getDate()==time.getDate()){
-					if(doneList[x].taskNum == taskNum) throw "今天以及打过卡咯"
+					if(doneList[x].taskNum == taskNum) throw "今天已经打过卡咯"
 				}
 			}
 			for (let x in limt) {

@@ -14,7 +14,6 @@ exports.route = {
 		} else {
 			let userdb = await mongodb('user')
 			let taskdb = await mongodb('task')
-			let res
 			try {
 				user = await userdb.findOne({ QQ })
 				//处理每日更新数据
@@ -45,7 +44,8 @@ exports.route = {
 				console.log(e)
 				throw "查询失败"
 			}
-			return user
+
+			return {teamname,name,QQ,num,teampoint,rating}=user
 		}
 	}
 }

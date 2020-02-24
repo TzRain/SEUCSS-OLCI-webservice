@@ -11,7 +11,7 @@ exports.route = {
 		try {
 			console.log(taskNum);
 			
-			let time = new Date()
+			let time = new Date((new Date).valueOf() + 60* 60 * 1000*8)
 			let minute = time.getUTCHours() * 60 + time.getUTCMinutes()
 			minute =605
 

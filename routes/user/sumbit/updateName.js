@@ -11,6 +11,8 @@ exports.route = {
 			if(name){
 				console.log(name);
 				await userdb.updateOne({_id},{ $set: {name} })
+			}else{
+				throw '名字不能为空'	
 			}
 		} catch (e) {
 			console.log(e)

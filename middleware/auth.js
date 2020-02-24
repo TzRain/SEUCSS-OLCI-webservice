@@ -11,8 +11,10 @@ const hash = value => {
 
 module.exports = async (ctx, next) => {
 	let userdb = await mongodb('user')
+	console.log(ctx);
+	console.log(ctx.params);
 	let { QQ, num } = ctx.params
-	// userdb.remove()
+
 	if(ctx.path=='/test'){
 		await next()
 	}else 
@@ -26,10 +28,10 @@ module.exports = async (ctx, next) => {
 		
 		if (!userQQ||!usernum) {
 			console.log("注册")
-			let name = ""
+			let name = num
 			let teamname = ""
 			let point = 0
-			let rank 
+			let rank = -1
 			let doneList = []
 			let token = hash(num)
 			await userdb.insertOne({
@@ -44,20 +46,19 @@ module.exports = async (ctx, next) => {
 			})
 			ctx.params.token=token
 			ctx.params.message="注册成功！"
-			await next()
 		} else {
 			console.log("登陆")
-			console.log(userQQ);
-			console.log(usernum);
 			if (userQQ.token == usernum.token){
 				console.log("登陆成功");
-				console.log(QQ.token);
 				ctx.params.token=userQQ.token
 				ctx.params.message="登陆成功！"
-				await next()
 			}
 			else throw "QQ号或者一卡通错误"
 		}
+		// if(ctx.path.substr(0,5)=='/admin'){
+		// 	if(QQ!="20202323233")throw 404
+		// }
+		await next()
 	} else {
 		console.log(ctx.request.headers);
 		let token = ctx.request.headers.authorization

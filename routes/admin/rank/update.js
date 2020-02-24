@@ -88,11 +88,11 @@ exports.route = {
         let pretime;
 
         if(!pretime){
-            pretime=new Date()
+            pretime= new Date((new Date).valueOf() + 60* 60 * 1000*8)
         }else if(pretime.getDate()==new Date().getDate()){
             throw "今天已经更新过了"
         }
-        pretime=new Date()
+        pretime=new Date((new Date).valueOf() + 60* 60 * 1000*8)
 
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try {

@@ -7,7 +7,7 @@ exports.route = {
     async get() {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try{
-            
+
         }catch(e){
             return "查询失败"    
         }

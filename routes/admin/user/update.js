@@ -4,13 +4,15 @@ const ObjectId = require('mongodb').ObjectId
 const path = "/admin/user/update"
 
 exports.route = {
-    async get() {
+    async get({}) {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try{
             
+
         }catch(e){
-            return "查询失败"    
+            console.log(e);
+            return e    
         }
-        return "查询成功"
+        return "更新成功"
     }
 }

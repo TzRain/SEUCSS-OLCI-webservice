@@ -36,25 +36,28 @@ exports.route = {
 				if (minute < limt[x]) break
 				v--
 			}
-
+			let f=false
 			for (let x in doneList) {
 				if(totalDay(doneList[x].time)+1==totalDay(time)){
 					if(doneList[x].taskNum == taskNum){
 						v++
+						f=true
 						break
 					}
 				}
 			}
-
-			for (let x in doneList) {
-				if(totalDay(doneList[x].time)+2==totalDay(time)){
-					if(doneList[x].taskNum == taskNum){
-						v++
-						break
+			if(f){
+				for (let x in doneList) {
+					if(totalDay(doneList[x].time)+2==totalDay(time)){
+						if(doneList[x].taskNum == taskNum){
+							v++
+							break
+						}
 					}
 				}
 			}
-			await doneList.push({ taskNum, time ,v})
+			let vis=false
+			await doneList.push({ taskNum, time ,v ,vis})
 			await userdb.updateOne({ _id }, { $set: { doneList } })
 		} catch (e) {
 			throw e

@@ -12,19 +12,15 @@ exports.route = {
 		let res="打卡成功!"
 		try {
 			let task = await taskdb.findOne({ taskNum })
-			let {  v } = task
-
+			let {v} = task
 			let user = await userdb.findOne({ QQ })
 			let { doneList } = user
-
 			for (let x in doneListToday) {
 				if (doneListToday[x] == taskNum) throw "今天已经完成咯"
 			}
-
-			await doneList.push({ taskNum, time ,v})
-			
+			let vis=false
+			await doneList.push({ taskNum, time ,v ,vis})
 			await userdb.updateOne({ QQ }, { $set: { doneList} })
-
 		} catch (e) {
 			console.log(e)
 			throw e

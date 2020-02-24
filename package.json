@@ -42,5 +42,8 @@
     "tough-cookie": "^3.0.1",
     "uuid": "^3.4.0",
     "vm": "^0.1.0"
+  },
+  "devDependencies": {
+    "koa-cors": "0.0.16"
   }
 }

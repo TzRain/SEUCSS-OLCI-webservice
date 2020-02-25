@@ -5,8 +5,6 @@ const kf = require('kf-router')
 const fs = require('fs')
 const chalk = require('chalk')
 
-
-
 program
   .version('1.0.0')
   .option('-m --mode <mode>', '执行模式 <production|development|profile>')
@@ -31,12 +29,15 @@ exports.config = config
 moment.locale('zh-cn')
 
 // 出错输出
+
 process.on('unhandledRejection', e => { throw e })
 process.on('uncaughtException', console.trace)
+
 
 // 监听两个结束进程事件，将它们绑定至 exit 事件，有两个作用：
 // 1. 使用 child_process 运行子进程时，可直接监听主进程 exit 事件来杀掉子进程；
 // 2. 防止按 Ctrl+C 时程序变为后台僵尸进程。
+
 process.on('SIGTERM', () => process.exit())
 process.on('SIGINT', () => process.exit())
 
@@ -81,9 +82,9 @@ app.use(require('./middleware/auth'))
 //（开发环境下是假 redis，不需要安装redis）
 // app.use(require('./middleware/redis'))
 // 4. 权限控制
-app.use(require('./middleware/permission'))
+// app.use(require('./middleware/permission'))
 // 5. 用户信息
-app.use(require('./middleware/user'))
+// app.use(require('./middleware/user'))
 
 /**
   ## F. 路由层
@@ -91,7 +92,6 @@ app.use(require('./middleware/user'))
 */
 app.use(kf())
 app.listen(program.port)
-
 // 开发环境下，启动 REPL
 if (program.mode === 'development') {
   require('./repl').start()

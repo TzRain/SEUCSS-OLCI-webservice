@@ -1,5 +1,3 @@
-
-
 // 修改为使用MongoDB数据库保存log
 module.exports = async (ctx, next) => {
   let begin = moment()
@@ -8,29 +6,17 @@ module.exports = async (ctx, next) => {
   let duration = end - begin
   let time = end.format('H:mm:ss')
 
-  let cardnum = '未登录'
+  let num = '未登录'
   let name = '未登录'
-  let platform = '未登录'
+  let QQ = '未登录'
 
-  // if (ctx.request.headers.token ) {
-  //   // 当请求中包含token，就可以向日志输出用户非敏感信息，以便于分析业务情况
-  //   try {
-  //     cardnum = ctx.user.cardnum
-  //     name = ctx.user.name
-  //     platform = ctx.user.platform
-  //   } catch (e) { 
-  //     //console.log(e)
-  //   }
-  // }
-
-  if (ctx.request.headers['x-api-token'] ) {
-    // 当请求中包含token，就可以向日志输出用户非敏感信息，以便于分析业务情况
+  if (ctx.request.headers.authorization ) {
     try {
-      cardnum = ctx.user.cardnum
-      name = ctx.user.name
-      platform = ctx.user.platform
+      num = ctx.params.num
+      name = ctx.params.name
+      QQ = ctx.params.QQ
     } catch (e) { 
-      //console.log(e)
+      console.log(e)
     }
   }
 
@@ -45,24 +31,8 @@ module.exports = async (ctx, next) => {
     ' ' + ctx.method +
     ' ' + chalkColored.blue(ctx.path) +
     ' ' + duration + 'ms' +
-    ' ' + (cardnum ? chalkColored.yellow(cardnum + ' ' + name) : ' ') +
-    ' ' + ((platform) ? chalkColored.cyan(platform) : ' ') +
+    ' ' + (num ? chalkColored.yellow(num + ' ' + name) : ' ') +
+    ' ' + ((QQ) ? chalkColored.cyan(QQ) : ' ') +
     (logMsg ? ' | ' + chalkColored.yellow(logMsg) : '')
   )
-  
-  // try {
-  //   let logCollection = await mongodb('xscwx_webservice_log')
-  //   await logCollection.insertOne({
-  //     cardnum:  cardnum,
-  //     username: name,
-  //     status:   status,
-  //     method:   ctx.method,
-  //     path:     ctx.path,
-  //     duration: duration,
-  //     msg:      logMsg ? logMsg : '',
-  //     platform: platform
-  //   })
-  // } catch(e) {
-  //   console.log('MongoDB服务出现错误', e)
-  // }
 }

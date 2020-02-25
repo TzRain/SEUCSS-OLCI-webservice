@@ -2,23 +2,21 @@ const mongodb = require('../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 const crypto = require('crypto');
 
-const axios = require('axios')
-const { config } = require('../app')
-
 const hash = value => {
 	return Buffer.from(crypto.createHash('md5').update(value).digest()).toString('base64')
 }
 
 module.exports = async (ctx, next) => {
 	let userdb = await mongodb('user')
-	console.log(ctx);
+	console.log("输出params")
 	console.log(ctx.params);
 	let { QQ, num } = ctx.params
-
 	if(ctx.path=='/test'){
 		await next()
 	}else 
 	if (ctx.path=='/user/login') {
+		console.log(QQ);
+		console.log(num);
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
 		let isnum = /213+[0-9]{6}/.test(num);

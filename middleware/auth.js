@@ -15,8 +15,8 @@ module.exports = async (ctx, next) => {
 		await next()
 	}else 
 	if (ctx.path=='/user/login') {
-		console.log(QQ);
-		console.log(num);
+		// console.log(QQ);
+		// console.log(num);
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
 		let isnum = /213+[0-9]{6}/.test(num);
@@ -58,10 +58,12 @@ module.exports = async (ctx, next) => {
 		// }
 		await next()
 	} else {
-		console.log(ctx.request.headers);
+		// console.log(ctx.request.headers);
 		let token = ctx.request.headers.authorization
+		// console.log(token);
 		if (token) {
 			let user = await userdb.findOne({ token })
+			console.log(user);
 			if (user) {
 				let { _id } = user
 				ctx.params._id = ObjectId(_id)

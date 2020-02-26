@@ -5,6 +5,7 @@ const path = "/user/sumbit/joinTeam"
 
 exports.route = {
     async get({ _id, newteamname }) {
+        console.log(newteamname);
 
         try {
             let userdb = await mongodb("user")

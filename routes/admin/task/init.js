@@ -20,6 +20,13 @@ exports.route = {
                 v: 4,
                 limt: [60 * 10, 60 * 11]
             })
+            for(let i=1;i<10;i++){
+                task.push({
+                    taskNum: i.toString(),
+                    v: i%5+1,
+                    limt: [0, 60 * 24]
+                })
+            }
             for(let i=13;i<20;i++){
                 task.push({
                     taskNum: i.toString(),

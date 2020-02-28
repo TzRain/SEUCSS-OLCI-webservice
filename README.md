@@ -181,19 +181,6 @@
 
 - 无
 
-### /admin/task/checkTask
-
-> 核实QQ用户taskNum已经提交
-
-**需要的数据**
-
-- QQ
-- taskNum
-
-### /admin/task/init
-
-> 初始化任务（暂时无法使用）
-
 ### admin/team/update
 
 > 更新队伍的数据
@@ -221,7 +208,14 @@
 ]
 ```
 
+### /admin/user/checkTask
 
+> 核实QQ用户taskNum已经提交
+
+**需要的数据**
+
+- QQ
+- taskNum
 
 ### admin/user/get
 

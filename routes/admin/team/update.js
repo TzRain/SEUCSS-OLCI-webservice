@@ -6,11 +6,12 @@ const path = "/admin/team/update"
 exports.route = {
     async get() {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
-        try{
-
-        }catch(e){
-            return "查询失败"    
+        try {
+            
+        } catch (e) {
+            console.log(e);
+            throw "更新失败"
         }
-        return "查询成功"
+        return "排名更新成功"
     }
 }

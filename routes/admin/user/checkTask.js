@@ -1,12 +1,12 @@
 const mongodb = require('../../../database/mongodb')
 const tasks = require('../../../static/tasks')
 
-const path = "/user/sumbit/checkTask"
+const path = "/adimn/user/checkTask"
 
-const newtime = () => new Date((new Date).valueOf() + 60 * 60 * 1000 * 8)
+const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
 
 exports.route = {
-	async get({ _id, taskNum }) {
+	async get({ QQ, taskNum }) {
 
 		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<")
 
@@ -16,20 +16,17 @@ exports.route = {
 			let time = newtime()
 			let minute = time.getUTCHours() * 60 + time.getUTCMinutes()
 
-			let { limt, val } = tasks[num]
+			let { val } = tasks[num]
 
 			let userdb = await mongodb('user')
-			let user = await userdb.findOne({ _id })
-			let { neamname, doneList, point } = user
+			let user = await userdb.findOne({ QQ })
+			let { neamname,doneList,point} = user
 
 			let teamdb = await mongodb('team')
-			let team = await teamdb.find({ neamname })
-			let { v } = team
+			let team = await teamdb.find({neamname})
+			let {v}=team
 
 			//判断是否合法
-
-			if (minute < limt[0]) throw "还没有开始呢"
-			if (limt.slice(-1) < minute) throw "今天已经结束咯"
 			for (let x in doneList) {
 				if (doneList[x].time.getDate() == time.getDate()) {
 					if (doneList[x].taskNum == taskNum) throw "今天已经打过卡咯"
@@ -61,14 +58,13 @@ exports.route = {
 					}
 				}
 			}
-			v += val
+			v+=val
 			await teamdb.updateOne({ teamname }, { $set: { v } })
-			point += val
-			await doneList.push({ taskNum, time, v })
-			await userdb.updateOne({ _id }, { $set: { doneList, point } })
-
+			point+=val
+			await doneList.push({ taskNum, time, v})
+			await userdb.updateOne({ QQ }, { $set: { doneList ,point} })
 		} catch (e) {
-			throw e
+			throw "打卡出错"
 		}
 		return "打卡成功"
 	}

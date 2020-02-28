@@ -8,16 +8,18 @@ const hash = value => {
 
 module.exports = async (ctx, next) => {
 	let userdb = await mongodb('user')
-	console.log("输出params")
-	console.log(ctx.params);
+	// console.log("输出params")
+	// console.log(ctx.params);
+	// console.log("输出path")
+	// console.log(ctx.path.substr(0,6))
 	let { QQ, num } = ctx.params
-	if(ctx.path.substr(0,5)=='/admin'){
+	if(ctx.path.substr(0,6)=='/admin'){
 		await next()	
 	}
-	if(ctx.path=='/test'){
+	else if(ctx.path=='/test'){
 		await next()
-	}else 
-	if (ctx.path=='/user/login') {
+	}
+	else if(ctx.path=='/user/login') {
 		console.log(QQ);
 		console.log(num);
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
@@ -56,14 +58,9 @@ module.exports = async (ctx, next) => {
 			}
 			else throw "QQ号或者一卡通错误"
 		}
-		// if(ctx.path.substr(0,5)=='/admin'){
-		// 	if(QQ!="20202323233")throw 404
-		// }
 		await next()
 	} else {
-		// console.log(ctx.request.headers);
 		let token = ctx.request.headers.authorization
-		// console.log(token);
 		if (token) {
 			let user = await userdb.findOne({ token })
 			console.log(user);

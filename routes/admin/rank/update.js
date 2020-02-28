@@ -89,7 +89,7 @@ exports.route = {
 
         if(!pretime){
             pretime= new Date((new Date).valueOf() + 60* 60 * 1000*8)
-        }else if(pretime.getDate()==new Date().getDate()){
+        }else if(pretime.getDate()==new Date((new Date).valueOf() + 60* 60 * 1000*8).getDate()){
             throw "今天已经更新过了"
         }
         pretime=new Date((new Date).valueOf() + 60* 60 * 1000*8)

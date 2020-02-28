@@ -11,6 +11,9 @@ module.exports = async (ctx, next) => {
 	console.log("输出params")
 	console.log(ctx.params);
 	let { QQ, num } = ctx.params
+	if(ctx.path.substr(0,5)=='/admin'){
+		await next()	
+	}
 	if(ctx.path=='/test'){
 		await next()
 	}else 

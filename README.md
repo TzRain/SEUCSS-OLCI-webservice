@@ -223,7 +223,7 @@
 
 
 
-### admin/user/update
+### admin/user/get
 
 > 更新个人的数据
 

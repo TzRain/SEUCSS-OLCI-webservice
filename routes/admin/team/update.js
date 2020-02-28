@@ -8,7 +8,7 @@ exports.route = {
         console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try {
             
-        } catch (e) {
+        }catch (e) {
             console.log(e);
             throw "更新失败"
         }

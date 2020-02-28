@@ -42,11 +42,11 @@ exports.route = {
             let userdb = await mongodb("user")
             let users = await userdb.find().sort({ point: -1 }).toArray();
             for(i in users){
-                let _id=ObjectId(users[i].id)
+                let _id=ObjectId(users[i]._id)
                 let user=await userdb.findOne({_id})
                 for(j in users){
                     if(user.point==users[j].point){
-                        let rank=Number(j+1)
+                        let rank=Number(Number(j)+1)
                         userdb.updateOne({_id},{ $set: { rank } })
                         break
                     }
@@ -54,11 +54,11 @@ exports.route = {
             }
             teams = await teamdb.find().sort({ teampoint: -1 }).toArray();
             for(i in teams){
-                let team=await teamdb.findOne({_id:ObjectId(teams[i].id)})
+                let team=await teamdb.findOne({_id:ObjectId(teams[i]._id)})
                 for(j in teams){
                     if(team.teampoint == teams[j].teampoint){
-                        let teamrank=Number(j+1)
-                        teamdb.updateOne({_id:ObjectId(teams[i].id)},{ $set: { teamrank } })
+                        let teamrank=Number(Number(j)+1)
+                        teamdb.updateOne({_id:ObjectId(teams[i]._id)},{ $set: { teamrank } })
                         break
                     }
                 }

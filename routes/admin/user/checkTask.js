@@ -3,7 +3,9 @@ const tasks = require('../../../static/tasks')
 
 const path = "/adimn/user/checkTask"
 
+
 const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
+const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toString()))/(24*60*60*1000))+1;
 
 exports.route = {
 	async get({ QQ, taskNum }) {
@@ -14,16 +16,14 @@ exports.route = {
 			console.log(taskNum);
 			let num = Number(taskNum)
 			let time = newtime()
-			let minute = time.getUTCHours() * 60 + time.getUTCMinutes()
-
 			let { val } = tasks[num]
 
 			let userdb = await mongodb('user')
 			let user = await userdb.findOne({ QQ })
-			let { neamname,doneList,point} = user
+			let { teamname,doneList,point} = user
 
 			let teamdb = await mongodb('team')
-			let team = await teamdb.find({neamname})
+			let team = await teamdb.find({teamname})
 			let {v}=team
 
 			//判断是否合法
@@ -34,10 +34,6 @@ exports.route = {
 			}
 
 			//计算分数
-			for (let x in limt) {
-				if (minute < limt[x]) break
-				val--
-			}
 			let f = false
 			for (let x in doneList) {
 				if (totalDay(doneList[x].time) + 1 == totalDay(time)) {
@@ -64,7 +60,8 @@ exports.route = {
 			await doneList.push({ taskNum, time, v})
 			await userdb.updateOne({ QQ }, { $set: { doneList ,point} })
 		} catch (e) {
-			throw "打卡出错"
+			console.log(e);
+			throw e
 		}
 		return "打卡成功"
 	}

@@ -1,8 +1,6 @@
 const mongodb = require('../../../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 
-const path = "/admin/team/get"
-
 exports.route = {
     async get() {
         try {

@@ -1,6 +1,5 @@
 const mongodb = require('../../../database/mongodb')
 const tasks = require('../../../static/tasks')
-const path = "/adimn/user/checkTask"
 
 const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
 const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toString()))/(24*60*60*1000))+1;
@@ -8,10 +7,9 @@ const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toS
 exports.route = {
 	async get({ QQ, taskNum }) {
 
-		console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<")
-
 		try {
 			console.log(taskNum);
+			console.log(QQ);
 			let num = Number(taskNum)
 			let time = newtime()
 			let { val } = tasks[num]
@@ -24,21 +22,22 @@ exports.route = {
 			let team = await teamdb.find({teamname})
 			let {v}=team
 
-			//判断是否合法
 			for (let x in doneList) {
 				if (doneList[x].time.getDate() == time.getDate()) {
 					if (doneList[x].taskNum == taskNum) throw "今天已经打过卡咯"
 				}
 			}
 
-			//计算分数
 			let f = false
-			for (let x in doneList) {
-				if (totalDay(doneList[x].time) + 1 == totalDay(time)) {
-					if (doneList[x].taskNum == taskNum) {
-						val++
-						f = true
-						break
+			if(tasks[num].add==true)f=true
+			if(f){
+				for (let x in doneList) {
+					if (totalDay(doneList[x].time) + 1 == totalDay(time)) {
+						if (doneList[x].taskNum == taskNum) {
+							val++
+							f = true
+							break
+						}
 					}
 				}
 			}

@@ -27,7 +27,6 @@ exports.route = {
                 scor.push(3)
                 limt.push(teams[14])
             }
-            
             for(t in teams){
                 let {v,teampoint}= teams[t]
                 for(i in limt){

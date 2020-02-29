@@ -4,7 +4,6 @@ const program = require('commander')
 const kf = require('kf-router')
 const fs = require('fs')
 const chalk = require('chalk')
-// const cors =require('koa-cors')
 program
   .version('1.0.0')
   .option('-m --mode <mode>', '执行模式 <production|development|profile>')
@@ -52,7 +51,6 @@ process.on('SIGINT', () => process.exit())
  */
 // 1. 跨域中间件，定义允许访问本服务的第三方前端页面
 app.use(require('./middleware/cors'))
-// app.use(cors)
 
 /**
   ## B. 监控层

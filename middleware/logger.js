@@ -5,17 +5,17 @@ module.exports = async (ctx, next) => {
   let end = moment()
   let duration = end - begin
   let time = end.format('H:mm:ss')
-
+  
   let num = '未登录'
   let name = '未登录'
   let QQ = '未登录'
 
-  if (ctx.request.headers.authorization ) {
+  if (ctx.request.headers.authorization) {
     try {
       num = ctx.params.num
       name = ctx.params.name
       QQ = ctx.params.QQ
-    } catch (e) { 
+    } catch (e) {
       console.log(e)
     }
   }

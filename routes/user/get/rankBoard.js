@@ -5,7 +5,7 @@ exports.route = {
         try {
             let userdb = await mongodb("user")
             let a = await userdb.find().sort({ point: -1 }).toArray();
-            let users= a.slice(0,9).map((user) => {
+            let users= a.slice(0,10).map((user) => {
                 return {
                     QQ:user.QQ,
                     num:user.num,
@@ -16,7 +16,7 @@ exports.route = {
             })
             let teamdb = await mongodb("team")
             let b = await teamdb.find().sort({ teampoint: -1 }).toArray();
-            let teams= b.slice(0,4).map((team) => {
+            let teams= b.slice(0,5).map((team) => {
                 return {
                     teamname:team.teamname,
                     teamrank:team.teamrank,

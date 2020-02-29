@@ -23,7 +23,7 @@ module.exports = async (ctx, next) => {
 			let name = num
 			let teamname = ""
 			let point = 0
-			let rank = 0
+			let rank 
 			let doneList = []
 			let token = hash(num)
 			await userdb.insertOne({

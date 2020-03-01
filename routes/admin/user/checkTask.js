@@ -54,7 +54,7 @@ exports.route = {
 			v+=val
 			await teamdb.updateOne({ teamname }, { $set: { v } })
 			point+=val
-			await doneList.push({ taskNum, time, v})
+			await doneList.push({ taskNum, time, v:val})
 			await userdb.updateOne({ QQ }, { $set: { doneList ,point} })
 		} catch (e) {
 			console.log(e);

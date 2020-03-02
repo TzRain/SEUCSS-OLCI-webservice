@@ -3,7 +3,7 @@ const tasks = [
 
     },
     {
-        val: 4,
+        val: 5,
         limt: [5 * 60, 6 * 60 + 30, 7 * 60],
         add:true
     },
@@ -15,7 +15,8 @@ const tasks = [
         val: 3,
     },
     {
-        val: 3,
+        val: 4,
+        limt:[0,24*60]
     },
     {
         val: 3,

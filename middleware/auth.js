@@ -19,7 +19,7 @@ module.exports = async (ctx, next) => {
 		if (!isnum) throw "无效一卡通号"
 		let userQQ = await userdb.findOne({ QQ })
 		let usernum = await userdb.findOne({ num })
-		if (!userQQ||!usernum) {
+		if (!userQQ && !usernum) {
 			let name = num
 			let teamname = ""
 			let point = 0

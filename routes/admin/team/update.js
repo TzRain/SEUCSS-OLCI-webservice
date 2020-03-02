@@ -1,11 +1,8 @@
 const mongodb = require('../../../database/mongodb')
 const ObjectId = require('mongodb').ObjectId
 
-const path = "/admin/team/update"
-
 exports.route = {
     async get() {
-        console.log("正在访问>>>>>>>>>" + path + "<<<<<<<<<<");
         try {
             let teamdb = await mongodb("team")
             let teams = await teamdb.find().sort({ v: -1 }).toArray();

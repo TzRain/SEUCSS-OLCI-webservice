@@ -21,8 +21,6 @@ module.exports = async (ctx, next) => {
 		let usernum = await userdb.findOne({ num })
 		console.log(userQQ);
 		console.log(usernum);
-		
-
 		if (!userQQ && !usernum) {
 			let name = num
 			let teamname = ""
@@ -41,7 +39,7 @@ module.exports = async (ctx, next) => {
 			ctx.params.token=token
 			ctx.params.message="注册成功！"
 		} else {
-			if (userQQ.token == usernum.token){
+			if (userQQ && usernum && userQQ.token == usernum.token){
 				ctx.params.token=userQQ.token
 				ctx.params.message="登陆成功！"
 			}

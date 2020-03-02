@@ -14,7 +14,7 @@ exports.route = {
 
 		let userdb = await mongodb('user')
 		let user = await userdb.findOne({ _id })
-		let { teamname, doneList, point } = usetr
+		let { teamname, doneList, point } = user
 
 		let teamdb = await mongodb('team')
 		let team = await teamdb.find({ teamname })

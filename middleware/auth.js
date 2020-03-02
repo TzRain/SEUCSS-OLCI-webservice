@@ -19,11 +19,14 @@ module.exports = async (ctx, next) => {
 		if (!isnum) throw "无效一卡通号"
 		let userQQ = await userdb.findOne({ QQ })
 		let usernum = await userdb.findOne({ num })
+		console.log(userQQ);
+		console.log(usernum);
+		
+
 		if (!userQQ && !usernum) {
 			let name = num
 			let teamname = ""
 			let point = 0
-			let rank 
 			let doneList = []
 			let token = hash(num)
 			await userdb.insertOne({
@@ -34,7 +37,6 @@ module.exports = async (ctx, next) => {
 				point,
 				doneList,
 				token,
-				rank
 			})
 			ctx.params.token=token
 			ctx.params.message="注册成功！"

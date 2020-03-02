@@ -14,10 +14,10 @@ exports.route = {
 
 		let userdb = await mongodb('user')
 		let user = await userdb.findOne({ _id })
-		let { neamname, doneList, point } = user
+		let { teamname, doneList, point } = usetr
 
 		let teamdb = await mongodb('team')
-		let team = await teamdb.find({ neamname })
+		let team = await teamdb.find({ teamname })
 		let { v } = team
 
 		if (minute < limt[0]) throw "还没有开始呢"

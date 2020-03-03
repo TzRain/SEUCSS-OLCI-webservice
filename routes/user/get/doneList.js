@@ -4,6 +4,6 @@ exports.route = {
 	async get({ _id }) {//GET方法
 		let userdb = await mongodb('user')
 		let user = await userdb.findOne({ _id })
-		return user.doneList
+		return user.doneList.reverse()
 	}
 }

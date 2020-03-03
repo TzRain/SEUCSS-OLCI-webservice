@@ -25,9 +25,11 @@ exports.route = {
 		if (limt.slice(-1) < minute) throw "今天已经结束咯"
 		for (let x in doneList) {
 			if (totalDay(doneList[x].time) == totalDay(time)) {
-				console.log("time:"+doneList[x].time);
+				console.log(doneList[x].time);
+				console.log("date:"+doneList[x].time.getDate());
 				console.log("day:"+totalDay(doneList[x].time));
-				console.log("time:"+time);
+				console.log(time);
+				console.log("date:"+time.getDate());
 				console.log("day:"+totalDay(time));
 				if (doneList[x].taskNum == taskNum) throw "今天已经打过卡咯"
 			}

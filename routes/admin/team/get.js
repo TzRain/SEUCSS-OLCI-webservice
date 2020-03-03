@@ -1,11 +1,16 @@
 const mongodb = require('../../../database/mongodb')
-const ObjectId = require('mongodb').ObjectId
+const getTeams = require('../../../static/members')
 
 exports.route = {
     async get() {
         try {
             let teamdb = await mongodb("team")
-            return teamdb.find().toArray()
+            let teams = await teamdb.find().toArray();
+
+            for(i in teams){
+                teams[i].members=await getTeams(teams[i].teamname)
+            }
+            return teams
         } catch (e) {
             console.log(e)
             throw e

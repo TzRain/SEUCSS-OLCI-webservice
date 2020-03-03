@@ -8,7 +8,7 @@ const tasks = [
         add:true
     },
     {
-        val: 2,
+        val: 3,
         limt: [6 * 60, 12 * 60]
     },
     {
@@ -22,8 +22,8 @@ const tasks = [
         val: 3,
     },
     {
-        val: 3,
-        limt: [21 * 60, 23 * 60 + 30]
+        val: 4,
+        limt: [0, 24 * 60]
     },
     {
         val: 4,

@@ -17,9 +17,12 @@ exports.route = {
 		let user = await userdb.findOne({ _id })
 		let { teamname, doneList, point } = user
 
+		let v=0
 		let teamdb = await mongodb('team')
-		let team = await teamdb.find({ teamname })
-		let { v } = team
+		if(teamname){
+			team=await teamdb.findOne({teamname})
+			v=team.v
+		}
 
 		if (minute < limt[0]) throw "还没有开始呢"
 		if (limt.slice(-1) < minute) throw "今天已经结束咯"
@@ -64,7 +67,9 @@ exports.route = {
 			}
 		}
 		v += val
-		await teamdb.updateOne({ teamname }, { $set: { v } })
+		if(teamname){
+			await teamdb.updateOne({ teamname }, { $set: { v } })
+		}
 		point += val
 		await doneList.push({ taskNum, time, v:val })
 		await userdb.updateOne({ _id }, { $set: { doneList, point } })

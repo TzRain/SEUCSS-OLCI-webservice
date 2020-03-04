@@ -7,7 +7,7 @@ const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toS
 exports.route = {
 	async get({ QQ, taskNum }) {
 		try {
-			console.log(taskNum);
+			if(!taskNum)throw "没有输入题号"
 			console.log(QQ);
 			let num = Number(taskNum)
 			let time = newtime()
@@ -16,12 +16,19 @@ exports.route = {
 
 			let userdb = await mongodb('user')
 			let user = await userdb.findOne({ QQ })
+
 			let { teamname,doneList,point} = user
 
+			let v=0
 			let teamdb = await mongodb('team')
-			let team = await teamdb.find({teamname})
-			let {v}=team
-
+			
+			if(teamname){
+				
+				team=await teamdb.findOne({teamname})
+				v=team.v
+			}
+			
+			
 			for (let x in doneList) {
 				if (totalDay(doneList[x].time) == totalDay(time)) {
 					console.log(doneList[x].time);
@@ -56,9 +63,13 @@ exports.route = {
 				}
 			}
 			v+=val
-			await teamdb.updateOne({ teamname }, { $set: { v } })
+			if(teamname){
+				await teamdb.updateOne({ teamname }, { $set: { v } })
+			}
 			point+=val
+			console.log(point);
 			await doneList.push({ taskNum, time, v:val})
+			
 			await userdb.updateOne({ QQ }, { $set: { doneList ,point} })
 		} catch (e) {
 			console.log(e);

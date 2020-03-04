@@ -33,7 +33,8 @@ exports.route = {
             return { teampoint,teamrank,teamname,users}
 		} catch (e) {
 			console.log(e);
-			throw "查询失败"
+			throw e
 		}
 	}
 }
+

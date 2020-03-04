@@ -10,6 +10,8 @@ exports.route = {
                 Number (res.teampoint)>=Number (limt)
             )
             for(i in teams){
+                console.log("v "+teams[i].v);
+                console.log("p "+teams[i].teampoint);
                 teams[i].members=await getTeams(teams[i].teamname)
             }
             return teams

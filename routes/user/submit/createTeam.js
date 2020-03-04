@@ -14,7 +14,7 @@ exports.route = {
         member.push(_id)
         let teampoint = 0
         let v = 0
-        await teamdb.insertOne({ teamname, member, teampoint, v })
+        await teamdb.insertOne({ teamname, member, teampoint, v })        
         await userdb.updateOne({ _id }, { $set: { teamname } })
         return "创建成功"
     }

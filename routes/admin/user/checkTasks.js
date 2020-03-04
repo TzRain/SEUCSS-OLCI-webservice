@@ -19,7 +19,7 @@ exports.route = {
 			let { teamname,doneList,point} = user
 
 			let teamdb = await mongodb('team')
-			let team = await teamdb.find({teamname})
+			let team = await teamdb.findOne({teamname})
 			let {v}=team
 			// console.log(point);
 			for(t in taskNums){

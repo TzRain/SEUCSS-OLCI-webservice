@@ -20,7 +20,6 @@ exports.route = {
                     doneList:user.doneList.slice(0,3),
                 })    
             }
-
             let b = await teamdb.find().sort({ teampoint: -1 }).toArray();
 			let teamrank = b.length
 			for(i in b){

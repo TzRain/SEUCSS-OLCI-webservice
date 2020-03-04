@@ -22,7 +22,15 @@ exports.route = {
                     doneList:user.doneList.slice(0,3),
                 })    
             }
-            return users
+            let b = await teamdb.find().sort({ teampoint: -1 }).toArray();
+			let teamrank = b.length
+			for(i in b){
+				if(team.teampoint>=b[i].teampoint){
+					teamrank=Number(Number(i)+1)
+					break
+				}
+			}
+            return { teampoint,teamrank,teamname,users}
 		} catch (e) {
 			console.log(e);
 			throw "查询失败"

@@ -7,7 +7,7 @@ exports.route = {
             let teamdb = await mongodb("team")
             let teams = await teamdb.find().toArray();
             teams=teams.filter(res=>
-                res.teampoint>=limt
+                Number (res.teampoint)>=Number (limt)
             )
             for(i in teams){
                 teams[i].members=await getTeams(teams[i].teamname)

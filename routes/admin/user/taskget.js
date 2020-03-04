@@ -5,13 +5,14 @@ const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toS
 
 exports.route = {
     async get({limt=0,all=false}) {
+        console.log(Number(limt));
         try {
             let userdb = await mongodb("user")
             let users=await userdb.find().toArray()
             users=users.filter(res=>{
                 for(i in res.doneList){
                     let task=res.doneList[i]
-                    if(task.num==limt){
+                    if(Number(task.num)==Number(limt)){
                         if(all)return true
                         else {
                             if(totalDay(task.time)==totalDay(newtime()))return true

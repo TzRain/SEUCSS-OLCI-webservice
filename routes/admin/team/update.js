@@ -10,7 +10,11 @@ exports.route = {
             let limt=[]
             let length=teams.length
 
-            if(teams[0].v==0)throw "你是不是手贱了hhh"    
+            console.log(teams);
+
+            if(teams[0].v==0){
+                throw "你是不是手贱了hhh"    
+            }
 
             scor.push(10)
             if(2<length)limt.push(teams[2].v)

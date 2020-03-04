@@ -2,7 +2,6 @@ const mongodb = require('../../../database/mongodb')
 const tasks = require('../../../static/tasks')
 
 const newtime = () => new Date((new Date).valueOf() + 60 * 60 * 1000 * 8)
-// const newtime = () => new Date()
 const totalDay = (time) => Math.ceil((time - new Date(newtime().getFullYear().toString())) / (24 * 60 * 60 * 1000)) + 1;
 
 exports.route = {

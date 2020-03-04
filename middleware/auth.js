@@ -52,8 +52,11 @@ module.exports = async (ctx, next) => {
 		if (token) {
 			let user = await userdb.findOne({ token })
 			if (user) {
-				let { _id } = user
+				let { _id ,num,QQ,name} = user
 				ctx.params._id = ObjectId(_id)
+				ctx.params.num = num
+				ctx.params.QQ = QQ
+				ctx.params.name = name
 				await next()
 			}
 			else throw "登陆过期,请重新登陆"

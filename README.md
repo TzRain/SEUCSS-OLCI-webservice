@@ -91,6 +91,7 @@
 
 **返回值**
 
+
 ```javascript
 "result": [
     {
@@ -218,13 +219,6 @@
 - 均**需要权限**才可以访问
   - 具体判断权限暂时没有实现
 
-### /admin/rank/update
-
-> 更新排名的信息
-
-**需要的数据**
-
-- 无
 
 ### admin/team/update
 
@@ -232,9 +226,12 @@
 
 ### admin/team/get
 
-> 获取所有队伍数据
+**需要的值**
+limt(默认为0)
 
 **返回值**
+
+队伍积分大于limt 的队伍
 
 ```javascript
 "result": [
@@ -316,9 +313,13 @@
 
 ### admin/user/get
 
-> 更新个人的数据
+**需要的值**
+limt(默认为0)
+
 
 **返回值**
+
+个人积分大于limt 的个人
 
 ```javascript
 "result": [
@@ -346,9 +347,51 @@
         },
     ]
 }
+
+
+
 ```
 
 
 
  
+### admin/user/taskget
 
+**需要的值**
+limt(题目编号)
+
+
+**返回值**
+
+今天完成过limt这个任务的的个人
+
+```javascript
+"result": [
+        {
+            "_id": "5e528200078bc04c9409db9a",
+            "QQ": "2440001",
+            "num": "2131000001",
+            "name": "",
+            "teamname": "机器人大家庭",
+            "point": 0,
+            "doneList": [],
+            "token": "+FJE8Sxe3ZS+3mXTD32J4A==",
+            "rank": 1
+        },
+        {
+            "_id": "5e528209078bc04c9409db9b",
+            "QQ": "2440002",
+            "num": "2131000002",
+            "name": "",
+            "teamname": "机器人大家庭",
+            "point": 0,
+            "doneList": [],
+            "token": "Jed3co5CWhFyfamivmHE4g==",
+            "rank": 1
+        },
+    ]
+}
+
+
+
+```

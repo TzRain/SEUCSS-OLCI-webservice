@@ -25,7 +25,6 @@ module.exports = async (ctx, next) => {
 		console.log(userQQ);
 		console.log(usernum);
 		if (!userQQ && !usernum) {
-			throw "活动还没有开始哦！"
 			let name = num
 			let teamname = ""
 			let point = 0

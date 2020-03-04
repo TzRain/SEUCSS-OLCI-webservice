@@ -11,7 +11,7 @@ exports.route = {
             let teamname = user.teamname
             let users = []
             let team=await teamdb.findOne({teamname})
-            let {member}=team
+            let { teampoint, member }=team
             for(let i in member){
                 let user=await userdb.findOne({_id:ObjectId(member[i])})
                 users.push({

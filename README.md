@@ -206,6 +206,8 @@
 
 - newname
 
+
+
 ### /user/sumbit/checkTask
 
 **需要的数据**
@@ -310,6 +312,16 @@ limt(默认为0)
 
 - QQ
 - taskNum
+
+### /admin/user/checkTasks
+
+> 核实QQ用户taskNum已经提交
+
+**需要的数据**
+
+- QQ
+- taskNums[]
+
 
 ### admin/user/get
 

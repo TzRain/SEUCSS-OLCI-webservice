@@ -4,7 +4,9 @@ const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
 const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toString()))/(24*60*60*1000))+1;
 
 exports.route = {
-    async get({limt=0,all=false}) {
+    async get({limt,all}) {
+        if(!limt)limt=0;
+        if(!all)all=false
         console.log(Number(limt));
         try {
             let userdb = await mongodb("user")

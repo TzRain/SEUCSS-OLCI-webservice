@@ -1,7 +1,8 @@
 const mongodb = require('../../../database/mongodb')
 
 exports.route = {
-    async get({limt=0}) {
+    async get({limt}) {
+        if(!limt)limt=0
         console.log(Number(limt));
         try {
             let userdb = await mongodb("user")

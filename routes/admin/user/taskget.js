@@ -23,6 +23,7 @@ exports.route = {
                 }
                 return false
             })
+            return users
         } catch (e) {
             console.log(e)
             throw e

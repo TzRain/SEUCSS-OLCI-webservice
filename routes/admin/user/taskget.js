@@ -14,9 +14,13 @@ exports.route = {
             users=users.filter(res=>{
                 for(i in res.doneList){
                     let task=res.doneList[i]
+                    console.log(task);
+                    
                     if(Number(task.num)==Number(limt)){
                         if(all)return true
                         else {
+                            console.log(task.time);
+                            console.log(newtime());
                             if(totalDay(task.time)==totalDay(newtime()))return true
                         }
                     }

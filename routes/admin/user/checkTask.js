@@ -13,7 +13,7 @@ exports.route = {
 			let time = newtime()
 			console.log(time);
 			let { val } = tasks[num]
-
+			if(!val)throw "错误题号"
 			let userdb = await mongodb('user')
 			let user = await userdb.findOne({ QQ })
 

@@ -10,6 +10,9 @@ module.exports = async (ctx, next) => {
 	let userdb = await mongodb('user')
 	let { QQ, num } = ctx.params
 	if(ctx.path.substr(0,6)=='/admin'||ctx.path=='/testforadmin'){
+
+		console.log(ctx.params);
+
 		await next()
 	}
 	else if(ctx.path=='/user/login') {

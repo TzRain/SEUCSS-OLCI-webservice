@@ -5,25 +5,23 @@ const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
 const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toString()))/(24*60*60*1000))+1;
 
 exports.route = {
-	async get(res) {
-		throw "该接口未编写完成 由于get请求中的数组无法正确接受"
+	async post({QQ,taskNums}) {
 		try {
-			// tasksNums=res.params[taskNums[]]
-			QQ=res.params.QQ
-			console.log(taskNums);
-			console.log(QQ);
 			if(!QQ)throw "没有输出QQ"
 			let time = newtime()
 			let userdb = await mongodb('user')
 			let user = await userdb.findOne({ QQ })
+			console.log(user);
 			let { teamname,doneList,point} = user
-
 			let teamdb = await mongodb('team')
-			let team = await teamdb.findOne({teamname})
-			let {v}=team
-			// console.log(point);
+			let v
+			if(teamname){
+				let team=await teamdb.findOne({teamname})
+				v=team.v
+			}
 			for(t in taskNums){
 				let num = taskNums[t]
+				let taskNum=num
 				console.log(time);
 				let { val } = tasks[num]
 				for (let x in doneList) {
@@ -62,11 +60,10 @@ exports.route = {
 				point+=val
 				await doneList.push({ taskNum, time, v:val})
 			}
-			// console.log(v);
-			// console.log(point);
-			await teamdb.updateOne({ teamname }, { $set: { v } })
+			if(teamname){
+				await teamdb.updateOne({ teamname }, { $set: { v } })
+			}
 			await userdb.updateOne({ QQ }, { $set: { doneList ,point} })
-			
 		} catch (e) {
 			console.log(e);
 			throw e

@@ -16,18 +16,16 @@ exports.route = {
 			if(!val)throw "错误题号"
 			let userdb = await mongodb('user')
 			let user = await userdb.findOne({ QQ })
-
+			if(!user)return "没有该QQ"
 			let { teamname,doneList,point} = user
 
 			let v=0
 			let teamdb = await mongodb('team')
 			
 			if(teamname){
-				
 				team=await teamdb.findOne({teamname})
 				v=team.v
 			}
-			
 			
 			for (let x in doneList) {
 				if (totalDay(doneList[x].time) == totalDay(time)) {

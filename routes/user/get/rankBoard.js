@@ -25,7 +25,7 @@ exports.route = {
 
             let teamdb = await mongodb("team")
             let b = await teamdb.find().sort({ teampoint: -1 }).toArray();
-            b=b.slice(0,5);
+            b=b.slice(0,10);
             let teams= b.map((team) => {
                 let teamrank = b.length;
                 for(i in b){

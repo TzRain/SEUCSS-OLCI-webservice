@@ -19,7 +19,7 @@ exports.route = {
                     name:user.name,
                     num:user.num,
                     point:user.point,
-                    doneList:user.doneList.slice(0,3),
+                    doneList:user.doneList.reverse().slice(0,3),
                 })    
             }
             let b = await teamdb.find().sort({ teampoint: -1 }).toArray();

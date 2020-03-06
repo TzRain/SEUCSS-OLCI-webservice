@@ -16,7 +16,7 @@ module.exports = async (ctx, next) => {
 		await next()
 	}
 	else if(ctx.path=='/user/login') {
-		if(num.lenght!=9)throw "无效一卡通号"
+		// if(num.lenght!=9)throw "无效一卡通号"
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
 		let isnum = /213+[0-9]{6}/.test(num);

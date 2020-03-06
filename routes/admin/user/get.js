@@ -5,7 +5,7 @@ exports.route = {
         if(!limt)limt=0
         try {
             let userdb = await mongodb("user")
-            let a=await userdb.find().toArray()
+            let a=await userdb.find().sort({ point: -1 }).toArray()
             let users= a.map((user) => {
                 let rank = a.length;
                 for(i in a){

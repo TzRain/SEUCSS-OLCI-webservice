@@ -307,11 +307,12 @@ limt(默认为0)
 ### /admin/user/checkTask
 
 > 核实QQ用户taskNum已经提交
-
+> 如果pre为true 则视为提交昨天的记录
 **需要的数据**
 
 - QQ
 - taskNum
+- pre(默认为false)
 
 ### /admin/user/checkTasks
 

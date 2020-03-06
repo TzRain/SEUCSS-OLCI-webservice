@@ -5,7 +5,10 @@ const newtime = () => new Date((new Date).valueOf() + 60* 60 * 1000*8)
 const totalDay = (time)=>Math.ceil(( time - new Date(newtime().getFullYear().toString()))/(24*60*60*1000))+1;
 
 exports.route = {
-	async get({ QQ, taskNum }) {
+	async get({ QQ, taskNum, cmd}) {
+
+		if(!cmd)cmd=false
+
 		try {
 			if(!taskNum)throw "没有输入题号"
 			console.log(QQ);
@@ -33,7 +36,9 @@ exports.route = {
 					console.log("day:"+totalDay(doneList[x].time));
 					console.log(time);
 					console.log("day:"+totalDay(time));
-					if (doneList[x].taskNum == taskNum) throw "今天已经打过卡咯"
+					if (doneList[x].taskNum == taskNum){
+						 if(!cmd)throw "今天已经打过卡咯"
+					}
 				}
 			}
 

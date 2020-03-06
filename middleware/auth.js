@@ -16,6 +16,8 @@ module.exports = async (ctx, next) => {
 		await next()
 	}
 	else if(ctx.path=='/user/login') {
+		QQ=QQ.trim()
+		num=num.trim()
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
 		let isnum = /213+[0-9]{6}/.test(num);

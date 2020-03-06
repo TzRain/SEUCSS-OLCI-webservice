@@ -5,6 +5,13 @@ exports.route = {
 	async get(res) {
         let userdb= await mongodb("user")
         let teamdb= await mongodb("team")
+
+        if(QQ){
+            let QQ="213182000 "
+            let newQQ="213182000"
+            await userdb.updateOne({QQ},{ $set: { newQQ } });
+        }
+
         if(res.showtasks){
            return tasks;
         }

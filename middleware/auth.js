@@ -19,8 +19,8 @@ module.exports = async (ctx, next) => {
 		if(num.length!=9)throw "无效一卡通号"
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
-		let isnum = /213+[0-9]{6}/.test(num);
-		if (!isnum) throw "无效一卡通号"
+		// let isnum = /213+[0-9]{6}/.test(num);
+		// if (!isnum) throw "无效一卡通号"
 		let userQQ = await userdb.findOne({ QQ })
 		let usernum = await userdb.findOne({ num })
 		console.log(userQQ);

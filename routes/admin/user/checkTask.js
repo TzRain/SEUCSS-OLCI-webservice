@@ -12,7 +12,7 @@ exports.route = {
 			console.log(QQ);
 			let num = Number(taskNum)
 			let time = newtime()
-			if(pre) time=new Date((new Date).valueOf() + 60* 60 * 1000*8-60* 60 * 1000*24)
+			if(pre) time=new Date((new Date).valueOf() + 60* 60 * 1000*8-60* 60 * 1000*24*pre)
 			console.log(time);
 			let { val } = tasks[num]
 			if(!val)throw "错误题号"

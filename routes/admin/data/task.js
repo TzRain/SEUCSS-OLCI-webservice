@@ -1,7 +1,7 @@
 const mongodb = require('../../../database/mongodb')
 
 exports.route ={
-    async get({task}){
+    async get(){
         let userdb = await mongodb("user")
         let users = await userdb.find().toArray()
         let totalNum = 0;

@@ -4,6 +4,7 @@ exports.route ={
     async get({task}){
         let userdb = await mongodb("user")
         let users = await userdb.find().toArray()
+        let totalNum = 0;
         let tasks ={
         1:0,
         2:0,
@@ -29,9 +30,10 @@ exports.route ={
             user.doneList.forEach(
                 done=>{
                     tasks[done.taskNum]++
+                    totalNum++;
                 }
             )
         })
-        return tasks
+        return {tasks,totalNum}
     }
 }

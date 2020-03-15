@@ -1,6 +1,6 @@
 const mongodb = require('../../../database/mongodb')
 
-exports.router ={
+exports.route ={
     async get({task}){
         let userdb = await mongodb("user")
         let users = await userdb.find().toArray()

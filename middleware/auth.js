@@ -16,11 +16,10 @@ module.exports = async (ctx, next) => {
 		await next()
 	}
 	else if(ctx.path=='/user/login') {
-		QQ=QQ.trim()
-		num=num.trim()
+		if(num.length!=9)throw "无效一卡通号"
 		let isQQ = /[1-9]+[0-9]{4,11}/.test(QQ);
 		if (!isQQ) throw "无效QQ号"
-		let isnum = /213+[0-9]{6}/.test(num);
+		let isnum = /[1-3]+[0-9]{8}/.test(num);
 		if (!isnum) throw "无效一卡通号"
 		let userQQ = await userdb.findOne({ QQ })
 		let usernum = await userdb.findOne({ num })

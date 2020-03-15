@@ -6,13 +6,25 @@ exports.route = {
         let userdb= await mongodb("user")
         let teamdb= await mongodb("team")
 
-        if(res.changenum){
-            let num="213182000 "
-            let newnum="213182000"
-            await userdb.updateOne({num},{ $set: { newnum } });
-            return "ok"
-        }
+        
 
+        if(res.changeQQ){
+            let num="213182000"
+            let {_id}=await userdb.findOne({num});
+            num="233333333"
+            QQ="233333333"
+            await userdb.updateOne({_id},{ $set: { QQ,num } });
+            console.log("ok2");
+        }
+        
+        if(res.changeQQ){
+            let num="213182000 "
+            let {_id}=await userdb.findOne({num});
+            num="213182000"
+            await userdb.updateOne({_id},{ $set: { num } });
+            console.log("ok1");
+        }
+        return "ok"
         // if(res.showtasks){
         //    return tasks;
         // }

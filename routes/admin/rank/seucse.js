@@ -15,7 +15,7 @@ exports.route ={
         
         users.forEach(user=>{
             Object.keys(seucse).forEach(c=>{
-                if(user.name.includes(c)){
+                if(user.name.includes(seucse[c].label)){
                     seucse[c].num+=user.point
                     seucse[c].arr.push({
                         name:user.name,

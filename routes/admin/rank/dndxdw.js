@@ -30,6 +30,8 @@ exports.route = {
                 statistic.dw.person++
             }
         })
+        statistic.dw.average = statistic.dw.point / statistic.dw.person
+        statistic.total.average = statistic.total.point / statistic.total.person
         return {
             statistic,
             dw

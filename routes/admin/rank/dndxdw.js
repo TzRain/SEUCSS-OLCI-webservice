@@ -23,7 +23,7 @@ exports.route = {
             if (user.name.includes("董导应援团")) {
                 dw.push({
                     name: user.name,
-                    cardnum: user.cardnum,
+                    cardnum: user.num,
                     point: user.point,
                 })
                 statistic.dw.point += user.point

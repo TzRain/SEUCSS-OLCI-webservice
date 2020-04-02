@@ -28,7 +28,7 @@ exports.route = {
             })
             total.push({
                 name: user.name,
-                cardnum: user.cardnum,
+                cardnum: user.num,
                 point: user.point,
                 tasks: tpTasks
             })

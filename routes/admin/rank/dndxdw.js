@@ -5,6 +5,7 @@ exports.route = {
         let userdb = await mongodb("user")
         let users = await userdb.find().toArray()
         let dw = [];
+        let total = [];
         let statistic = {
             dw: {
                 point: 0,
@@ -18,6 +19,19 @@ exports.route = {
             }
         }
         users.forEach(user => {
+            let tpTasks = [];
+            for (let i = 1; i <= 18; i++) {
+                tpTasks.push({ taskNum: i, done: 0 })
+            }
+            uers.doneList.forEach(x => {
+                tpTasks[x.taskNum - 1].done++;
+            })
+            total.push({
+                name: user.name,
+                cardnum: user.cardnum,
+                point: user.point,
+                tasks: tpTasks
+            })
             statistic.total.point += user.point
             statistic.total.person++
             if (user.name.includes("董导应援团")) {
@@ -34,7 +48,8 @@ exports.route = {
         statistic.total.average = statistic.total.point / statistic.total.person
         return {
             statistic,
-            dw
+            dw,
+            total,
         }
     }
 }

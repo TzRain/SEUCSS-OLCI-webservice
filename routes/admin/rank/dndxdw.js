@@ -23,7 +23,7 @@ exports.route = {
             for (let i = 1; i <= 18; i++) {
                 tpTasks.push({ taskNum: i, done: 0 })
             }
-            uers.doneList.forEach(x => {
+            user.doneList.forEach(x => {
                 tpTasks[x.taskNum - 1].done++;
             })
             total.push({
